@@ -34,7 +34,7 @@ services:
     environment:
       - HOSTNAME=listener
       - JOINCODE=${JOINCODE}
-    command: husarnet setup-server consolelogdupa.com && husarnet-docker
+    command: bash -c "husarnet setup-server consolelogdupa.com && husarnet-docker"
 
 # Needed if running all compose.*.yaml files on the same host. Thanks to those lines a new subnet for this compose file is created
 networks:

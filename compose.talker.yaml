@@ -14,7 +14,6 @@ services:
 
   dds_router_talker:
     image: ghcr.io/dominikn/ros-galactic-fastdds:latest
-    restart: always
     network_mode: service:husarnet_talker
     volumes:
       - ./router-config.talker.yaml:/config.yaml
@@ -23,7 +22,6 @@ services:
     
   husarnet_talker:
     image: husarnet/husarnet
-    restart: always
     # network_mode: host
     devices:
       - /dev/net/tun
@@ -36,7 +34,7 @@ services:
     environment:
       - HOSTNAME=talker
       - JOINCODE=${JOINCODE}
-    command: husarnet-docker& && husarnet wait && husarnet setup-server consolelogdupa.com 
+    command: bash -c "husarnet setup-server consolelogdupa.com && husarnet-docker"
 
 # Needed if running all compose.*.yaml files on the same host. Thanks to those lines a new subnet for this compose file is created
 networks:
